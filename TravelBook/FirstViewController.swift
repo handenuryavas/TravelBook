@@ -30,7 +30,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         getData()
     }
-    func getData()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(getData), name: NSNotification.Name("newPlace"), object: nil)
+    }
+        
+    @objc func getData()
     {
         let appDelegete = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegete.persistentContainer.viewContext
